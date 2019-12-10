@@ -1,0 +1,44 @@
+<div class="form-group" >
+<form method="post">
+<% include ./partials/messages %>
+	<table class="table table-primary">
+		<tr>
+		<td>Customer Name:</td>
+            <td><input type="text" placeholder="Enter Customer Name" id="cname" name="cname" value="<%= order.cname %>"></td>
+            </tr>
+            <tr>
+            <td>Email:</td>
+            <td><input type="text" placeholder="Enter Customer Email" name="cemail" value="<%= order.cemail %>"></td>
+            </tr>
+            <tr>
+            <td>Address:</td>
+            <td><input type="text" placeholder="Enter Customer Name" name="caddress" value="<%= order.caddress %>"></td>
+            </tr>
+            <tr>
+            <td>Contact:</td>
+            <td><input type="text" placeholder="Enter Customer Name" name="cphone" value="<%= order.cphone %>"></td>
+            </tr>
+            <tr>
+            <td>Pick Up:</td>
+            <td><input type="text" placeholder="Enter Customer Name" name="plocation" value="<%= order.plocation %>"></td>
+            </tr>
+            <tr>
+            <td>Drop Off:</td>
+            <td><input type="text" placeholder="Enter Customer Name" name="dlocation" value="<%= order.dlocation %>"></td>
+            </tr>
+            <tr>
+            <td>Vehicle Assigned:</td>
+            <td><input type="text" placeholder="Insert Assigned Vehicle" name="vehicle" value="<%= order.vehicle %>"></td>
+            </tr>
+            <tr>
+            <td>
+            <button type="submit" class="btn btn-primary btn-block">
+          Edit
+        </button>
+            </td>
+            </tr>
+		</tr>
+	</table>
+
+</form>
+</div>

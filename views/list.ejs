@@ -1,0 +1,43 @@
+<p></p>
+<nav class="">
+<form action="/list" method="GET" class="form-inline">
+    <div class="form-group" >
+        <input type="text" name="search" placeholder="Search by Name" class="form-control"> &nbsp &nbsp
+         <input type="submit" class="btn btn-secondary" value="Search">
+    </div>
+</form>
+</nav>
+<br/>
+      <% include ./partials/messages %>
+<h3><a class="btn btn-primary" href="/dashboard"><i class="fa fa-home"></i> Dashboard</a> &nbsp Registered List</h3>
+<table class="table table" bgcolor="white">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Pick Up</th>
+            <th>Drop Off</th>
+            <th>Vehicle Assigned</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% order.forEach(function(order) { %>
+        <tr>
+            <td><%= order.cname %></td>
+            <td><%= order.cemail %></td>
+            <td><%= order.caddress %></td>
+            <td><%= order.cphone %></td>
+            <td><%= order.plocation %></td>
+            <td><%= order.dlocation %></td>
+            <td><%= order.vehicle %></td>
+            <td>
+                <a class="btn btn-danger" href='/list/<%= order._id%>'><i class="fa fa-user"></i> Delete</a></h3>
+                <a class="btn btn-info" href='/edit/<%= order._id%>'><i class="fa fa-plus"></i> Edit</a></h3>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>

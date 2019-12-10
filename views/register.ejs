@@ -1,0 +1,143 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-user-plus"></i> New Customer
+      </h1><br/>
+      <% include ./partials/messages %>
+      <form action="/register" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="name"
+            id="name"
+            name="name"
+            class="form-control"
+            placeholder="Enter Name"
+            value="<%= typeof name != 'undefined' ? name : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter Email"
+            value="<%= typeof email != 'undefined' ? email : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Create Password"
+            value="<%= typeof password != 'undefined' ? password : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            class="form-control"
+            placeholder="Confirm Password"
+            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="form-control"
+            placeholder="Enter a valid Phone Number"
+          />
+        </div>
+         <div class="form-group">
+          <label for="occupation">Occupation</label>
+          <input
+            type="name"
+            id="occupation"
+            name="occupation"
+            class="form-control"
+            placeholder="Enter Occupation"
+          />
+        </div>
+    <div class="form-group">
+    <label for="state">Select State:</label>
+    <select name="state" id="state" class="form-control" required>
+      <option></option>
+      <option value="Abia">Abia</option>
+      <option value="Adamawa">Adamawa</option>
+      <option value="Akwa Ibom">Akwa Ibom</option>
+      <option value="Anambra">Anambra</option>
+      <option value="Bauchi">Bauchi</option>
+      <option value="Bayelsa">Bayelsa</option>
+      <option value="Benue">Benue</option>
+      <option value="Cross River">Cross River</option>
+      <option value="Delta">Delta</option>
+      <option value="Ebonyi">Ebonyi</option>
+      <option value="Enugu">Enugu</option>
+      <option value="Edo">Edo</option>
+      <option value="Ekiti">Ekiti</option>
+      <option value="Gombe">Gombe</option>
+      <option value="Imo">Imo</option>
+      <option value="Jigawa">Jigawa</option>
+      <option value="Kaduna">Kaduna</option>
+      <option value="Kano">Kano</option>
+      <option value="Katsina">Katsina</option>
+      <option value="Kebbi">Kebbi</option>
+      <option value="Kogi">Kogi</option>
+      <option value="Kwara">Kwara</option>
+      <option value="Lagos">Lagos</option>
+      <option value="Nassarawa">Nassarawa</option>
+      <option value="Niger">Niger</option>
+      <option value="Ogun">Ogun</option>
+      <option value="Ondo">Ondo</option>
+      <option value="Osun">Osun</option>
+      <option value="Oyo">Oyo</option>
+      <option value="Plateau">Plateau</option>
+      <option value="Rivers">Rivers</option>
+      <option value="Sokoto">Sokoto</option>
+      <option value="Taraba">Taraba</option>
+      <option value="Yobe">Yobe</option>
+      <option value="Zamfara">Zamfara</option>
+      <option value="FCT">FCT</option>
+    </select>
+    </div>
+        <div class="form-group">
+          <label for="info">Home Address</label>
+          <textarea
+            type="name"
+            id="address"
+            name="address"
+            class="form-control"
+            rows="5"
+            maxlength="200"
+            cols="100"
+            placeholder="Address"
+          ></textarea>
+        </div> 
+    <div class="form-group">
+      <label>Gender:</label>
+      <select name="gender" id="gender" class="form-control" required>
+      <option></option>
+      <option value="Female">Female</option>
+      <option value="Male">Male</option>
+      </select>
+    </div>      
+        <button type="submit" class="btn btn-primary btn-block">
+          Register
+        </button>
+      </form>
+      <p class="lead mt-4">Have An Account? <a href="/login">Login</a></p>
+    </div>
+  </div>
+</div>

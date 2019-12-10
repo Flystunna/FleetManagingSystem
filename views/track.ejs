@@ -1,0 +1,32 @@
+
+<p></p>
+
+<form action="/track" method="GET">
+    <div class="form-inline" >
+        <input type="text" name="search" placeholder="Search" class="form-control">&nbsp
+         <input type="submit" class="btn btn-success" value="search">
+    </div>
+</form>
+<br/>
+<br/>
+<% include ./partials/messages %>
+
+<table class="table table-dark" style="border-radius: 25px">
+    <% order.forEach(function(order) { %>
+        <div class="container">
+            <tr> 
+            <td>Customer Name: <%= order.cname %></td>
+            </tr>
+            <tr>
+            <td>Customer Email: <%= order.cemail %></td>
+            </tr>
+            <tr><td>Customer Address: <%= order.caddress %></td></tr>
+            <tr><td>Customer Phone: <%= order.cphone %></td></tr>
+            <tr><td>Customer Pick Up Location: <%= order.plocation %></td></tr>
+            <tr><td>Customer Drop Off Location: <%= order.dlocation %></td></tr>
+            <tr>
+            <td>Transport Vehicle Assigned: <%= order.vehicle %></td>
+            </tr>
+        </div>
+        <% }) %>
+</table>
