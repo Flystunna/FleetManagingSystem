@@ -5,7 +5,7 @@
         <i class="fas fa-user-plus"></i> New Customer
       </h1><br/>
       <% include ./partials/messages %>
-      <form action="/register" method="POST">
+      <form action="/register" id="form" method="POST">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -141,3 +141,21 @@
     </div>
   </div>
 </div>
+
+<!-- <script src="/scripts/jquery.min.js"></script>
+<script src="/scripts/sweetalert2.all.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    //import JQuery from script
+//import swal script
+$("#form").on("submit", function(e){
+e.preventDefault();
+$.ajax({
+  url: "/register",
+  method: "post"
+}).done(d=>{
+  swal(e.responseJSON);
+});
+})
+});
+</script> -->

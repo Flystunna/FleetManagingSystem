@@ -83,8 +83,6 @@ router.get('/list', checkUser, ensureAuthenticated, (req, res) => {
 // about Page
 router.get('/contact', (req, res) => res.render('contact'));
 
-
-
 // Register Page
 router.get('/register', (req, res) => res.render('register'));
 
@@ -94,7 +92,6 @@ router.post('/register', (req, res) => {
 
   //check required fields
   if (!name || !email || !password || !password2 || !occupation || !phone || !address || !state || !gender) {
-    Swal.fire('Oops...', 'Something went wrong!', 'error');
     errors.push({ msg: 'Please enter all fields' });
   }
 
