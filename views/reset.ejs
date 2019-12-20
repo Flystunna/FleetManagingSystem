@@ -1,0 +1,74 @@
+<% include ./partials/header %>
+<% include ./partials/messages %>
+<br/><br/>
+<div class="row" style="background-color: white; border-radius: 5px;">
+	<div class="col-md-12">
+		<form action="/reset/<%= token %>" name="myForm" onsubmit="return validateForm();" method="POST"><br/><br/>
+			<legend><h1>Reset Password</h1></legend><br/><br/>
+			<div class="form-group">
+				<label for="email">New Password: </label>
+				<input type="password" placeholder="Enter new password" name="password" id="password"  autofocus class="form-control">
+            </div>
+            <div class="form-group">
+                    <label for="email">Confirm Password: </label>
+                    <input type="password" placeholder="Confirm new password" name="confirm" id="confirm" autofocus class="form-control">
+                </div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary" value="Reset Password">
+			</div>
+		</form>
+	</div>
+</div>
+<% include ./partials/foot %>
+<script>
+	function validateForm() {
+  var inpPass = document.getElementById("password");
+  var inpConf = document.getElementById("confirm");
+  var x = document.forms["myForm"]["password"].value;
+  var y = document.forms["myForm"]["confirm"].value;
+ 
+  if (x == "") {
+	Swal.fire({
+		title: 'Oops...',
+		text: "Password is required",
+		icon: 'warning',
+		confirmButtonColor: '#d33',
+		confirmButtonText: 'Error'
+		})
+    return false;
+  }
+  else if (y == "") {
+	Swal.fire({
+		title: 'Oops...',
+		text: "Confirm Password is required",
+		icon: 'warning',
+		confirmButtonColor: '#d33',
+		confirmButtonText: 'Error'
+		})
+    return false;
+  }
+  else if (x != y)
+  {
+    Swal.fire({
+		title: 'Oops...',
+		text: "Password and Confirm Password does not match",
+		icon: 'warning',
+		confirmButtonColor: '#d33',
+		confirmButtonText: 'Error'
+		})
+    return false;
+  }
+  else
+  {
+    Swal.fire({
+		title: 'Done',
+		text: "Password successfully changed",
+		icon: 'success',
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: 'Ok'
+		})
+    return true;
+  }
+} 
+
+</script>
