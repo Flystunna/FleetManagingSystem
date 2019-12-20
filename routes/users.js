@@ -343,6 +343,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
       dbCollection.findOneAndDelete({ _id: new ObjectID(req.params.id) }, function(err, order) {
         if (err) {
           req.flash("error_msg", "Order not deleted");
+          
           res.redirect("/list");
         } else {
           req.flash("error_msg", "Order deleted successfuly");
