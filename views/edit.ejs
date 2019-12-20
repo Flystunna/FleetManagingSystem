@@ -1,44 +1,48 @@
-<div class="form-group" >
-<form method="post">
+<% include ./partials/header %>
 <% include ./partials/messages %>
-	<table class="table table-primary">
-		<tr>
-		<td>Customer Name:</td>
-            <td><input type="text" placeholder="Enter Customer Name" id="cname" name="cname" value="<%= order.cname %>"></td>
-            </tr>
-            <tr>
-            <td>Email:</td>
-            <td><input type="text" placeholder="Enter Customer Email" name="cemail" value="<%= order.cemail %>"></td>
-            </tr>
-            <tr>
-            <td>Address:</td>
-            <td><input type="text" placeholder="Enter Customer Name" name="caddress" value="<%= order.caddress %>"></td>
-            </tr>
-            <tr>
-            <td>Contact:</td>
-            <td><input type="text" placeholder="Enter Customer Name" name="cphone" value="<%= order.cphone %>"></td>
-            </tr>
-            <tr>
-            <td>Pick Up:</td>
-            <td><input type="text" placeholder="Enter Customer Name" name="plocation" value="<%= order.plocation %>"></td>
-            </tr>
-            <tr>
-            <td>Drop Off:</td>
-            <td><input type="text" placeholder="Enter Customer Name" name="dlocation" value="<%= order.dlocation %>"></td>
-            </tr>
-            <tr>
-            <td>Vehicle Assigned:</td>
-            <td><input type="text" placeholder="Insert Assigned Vehicle" name="vehicle" value="<%= order.vehicle %>"></td>
-            </tr>
-            <tr>
-            <td>
-            <button type="submit" class="btn btn-primary btn-block">
-          Edit
-        </button>
-            </td>
-            </tr>
-		</tr>
-	</table>
-
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Edit Order
+        </h1><br/>
+        <% include ./partials/messages %>
+        <form method="POST">
+          <div class="form-group col-md-10">
+            <label for="name">Customer Name:</label>
+            <input type="text" placeholder="Enter Customer Name" class="form-control" id="cname" name="cname" value="<%= order.cname %>">
+          </div>  
+           <div class="form-group col-md-10">
+            <label for="name">Customer Email:</label>
+            <input type="text" placeholder="Enter Customer Email"  class="form-control"  name="cemail" value="<%= order.cemail %>">          
+          </div>  
+          <div class="form-group col-md-10">
+              <label for="name">Customer Address:</label>
+              <input type="text" placeholder="Enter Customer Name" class="form-control"  name="caddress" value="<%= order.caddress %>">
+            </div>
+            <div class="form-group col-md-10">
+                <label for="name">Contact:</label>
+                <input type="text" placeholder="Enter Customer Name" class="form-control" name="cphone" value="<%= order.cphone %>">
+              </div> 
+              <div class="form-group col-md-10">
+                  <label for="name">Pick Up:</label>
+                  <input type="text" placeholder="Enter Customer Name" class="form-control" name="plocation" value="<%= order.plocation %>">
+                </div>
+                <div class="form-group col-md-10">
+                    <label for="name">Drop Off:</label>
+                    <input type="text" placeholder="Enter Customer Name" class="form-control" id="cname" name="cname" value="<%= order.dlocation %>">
+                  </div>
+                  <div class="form-group col-md-10">
+                      <label for="name">Vehicle Assigned:</label>
+                      <input type="text" placeholder="Insert Assigned Vehicle" class="form-control" name="vehicle" value="<%= order.vehicle %>">
+                    </div>
+                    <div class="form-group col-md-5" > 
+          <button type="submit"  class="btn btn-primary btn-block"><i class="fa fa-send-o"></i>  Edit</button>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
 </form>
 </div>
+<% include ./partials/foot %>

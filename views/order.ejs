@@ -15,6 +15,7 @@
             name="cname"
             class="form-control"
             placeholder="Enter Name"
+            autocomplete="off"
             value="<%= typeof name != 'undefined' ? name : '' %>"
           />
         </div>
@@ -26,6 +27,7 @@
             name="cemail"
             class="form-control"
             placeholder="Enter Email"
+            autocomplete="off"
             value="<%= typeof email != 'undefined' ? email : '' %>"
           />
         </div>
@@ -120,6 +122,7 @@
             id="cphone"
             name="cphone"
             class="form-control"
+            autocomplete="off"
             placeholder="Enter a valid Phone Number"
           />
         </div>
@@ -148,7 +151,7 @@
           Add
         </button>
       </form>
-      <p class="lead mt-4">Admin Page <a href="/master"> Master</a></p>
+      <p class="lead mt-4">Admin Page <a href="/list"> Master</a></p>
     </div>
   </div>
 </div>

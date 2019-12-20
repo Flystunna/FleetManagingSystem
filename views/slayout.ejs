@@ -68,6 +68,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="#">Add Link</a></li>
 					</ul>
 				</li>
+				<% if(!currentUser){ %>
+					<li class="mr-lg-4 mr-2"><a href="/login">Login</a></li>
+				  <li class="mr-lg-4 mr-2"><a href="/register">Register</a></li>
+				   <% } else { %>
+					<li><a class="mr-lg-4 mr-2" href="/dashboard"> Welcome <strong>
+					  <%=currentUser.name %></strong></a></li>
+					<li><a class="mr-lg-4 mr-2" href="/logout">Logout</a></li>
+					<% } %>
 				<li class="mr-lg-4 mr-2"><a href="/contact">Contact</a></li>
 				<li class=""><a href="#subscribe">Subscribe</a></li>
 			</ul>

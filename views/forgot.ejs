@@ -1,11 +1,12 @@
 <% include ./partials/messages %>
-<div class="row">
+<br/><br/>
+<div class="row" style="background-color: white; border-radius: 5px;">
 	<div class="col-md-12">
-		<form action="/forgot" method="POST">
-			<legend>Forgot Password</legend>
+		<form action="/forgot" name="myForm" onsubmit="return validateForm()" method="POST"><br/><br/>
+			<legend><h1>Forgot Password</h1></legend><br/><br/>
 			<div class="form-group">
-				<label for="email">Email</label>
-				<input type="email" name="email" autofocus class="form-control">
+				<label for="email">Email: </label>
+				<input type="email" placeholder="Email Address" name="email" autofocus class="form-control">
 			</div>
 			<div class="form-group">
 				<input type="submit" class="btn btn-primary" value="Reset Password">
@@ -13,3 +14,19 @@
 		</form>
 	</div>
 </div>
+<script>
+	function validateForm() {
+  var x = document.forms["myForm"]["email"].value;
+  if (x == "") {
+	Swal.fire({
+		title: 'Oops...',
+		text: "Email is required",
+		icon: 'warning',
+		confirmButtonColor: '#d33',
+		confirmButtonText: 'Error'
+		})
+    return false;
+  }
+} 
+
+</script>

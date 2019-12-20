@@ -5,7 +5,7 @@
         <i class="fas fa-user-plus"></i> New Customer
       </h1><br/>
       <% include ./partials/messages %>
-      <form action="/register" id="form" method="POST">
+      <form action="/register" id="form" name="myForm" onsubmit="return validateForm()"  method="POST">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -25,6 +25,7 @@
             name="email"
             class="form-control"
             placeholder="Enter Email"
+            autocomplete="off"
             value="<%= typeof email != 'undefined' ? email : '' %>"
           />
         </div>
@@ -36,6 +37,7 @@
             name="password"
             class="form-control"
             placeholder="Create Password"
+            autocomplete="off"
             value="<%= typeof password != 'undefined' ? password : '' %>"
           />
         </div>
@@ -47,6 +49,7 @@
             name="password2"
             class="form-control"
             placeholder="Confirm Password"
+            autocomplete="off"
             value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
           />
         </div>
@@ -57,6 +60,7 @@
             id="phone"
             name="phone"
             class="form-control"
+            autocomplete="off"
             placeholder="Enter a valid Phone Number"
           />
         </div>
@@ -67,6 +71,7 @@
             id="occupation"
             name="occupation"
             class="form-control"
+            autocomplete="off"
             placeholder="Enter Occupation"
           />
         </div>
@@ -123,6 +128,7 @@
             maxlength="200"
             cols="100"
             placeholder="Address"
+            autocomplete="off"
           ></textarea>
         </div> 
     <div class="form-group">
@@ -141,21 +147,37 @@
     </div>
   </div>
 </div>
-
-<!-- <script src="/scripts/jquery.min.js"></script>
-<script src="/scripts/sweetalert2.all.js"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-    //import JQuery from script
-//import swal script
-$("#form").on("submit", function(e){
-e.preventDefault();
-$.ajax({
-  url: "/register",
-  method: "post"
-}).done(d=>{
-  swal(e.responseJSON);
-});
-})
-});
-</script> -->
+<script>
+    function validateForm() {
+    var name = document.forms["myForm"]["name"].value;
+    var email = document.forms["myForm"]["email"].value;
+    var password = document.forms["myForm"]["password"].value;
+    var phone = document.forms["myForm"]["phone"].value;
+    var occupation = document.forms["myForm"]["occupation"].value;
+    if (name == "") {
+    Swal.fire({ title: 'Oops...', text: "Full Name is required", icon: 'warning', confirmButtonColor: '#d33',
+    confirmButtonText: 'Error' })
+    return false;
+    }
+    else if (email == "") {
+    Swal.fire({ title: 'Oops...', text: "Email is required", icon: 'warning', confirmButtonColor: '#d33',
+    confirmButtonText: 'Error' })
+    return false;
+    }
+    else if (password == "") {
+    Swal.fire({ title: 'Oops...', text: "Password is required", icon: 'warning', confirmButtonColor: '#d33',
+    confirmButtonText: 'Error' })
+    return false;
+    }
+    else if (phone == "") {
+    Swal.fire({ title: 'Oops...', text: "Phone is required", icon: 'warning', confirmButtonColor: '#d33',
+    confirmButtonText: 'We need to reach you!' })
+    return false;
+    }
+    // else if (occupation == "") {
+    // Swal.fire({ title: 'Oops...', text: "Occupation is required", icon: 'warning', confirmButtonColor: '#d33',
+    // confirmButtonText: 'Not Done!' })
+    // return false;
+    // }
+  } 
+  </script>

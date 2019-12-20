@@ -1,4 +1,7 @@
 var User = require("../models/User");
+const db = require("../config/db");
+const dbName = "Users";
+const collectionName = "Users";
 
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
@@ -9,8 +12,16 @@ module.exports = {
     res.redirect('/login');
   },
   checkUser: function(req, res, next){
+    db.initialize(dbName, collectionName, function (dbCollection) { // successCallback
+      // get all items
+      dbCollection.find().toArray(function (err, result) {
+         if (err) throw err;
+         // console.log(result);
+   
+         // << return response to client >>
+      });
         if(req.isAuthenticated()){
-            User.find(function(err, user){
+          dbCollection.find(function(err, user){
                if ( req.user.isAdmin === true){
                    next();
                } else {
@@ -22,5 +33,7 @@ module.exports = {
             req.flash("error", "You need to be signed in!");
             res.redirect('/login');
         }
+      })
     },
 };
+

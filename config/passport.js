@@ -4,12 +4,21 @@ const bcrypt = require('bcryptjs');
 
 // Load User model
 const User = require('../models/User');
+const db = require("../config/db");
+const dbName = "Users";
+const collectionName = "Users";
+var user_cache = {};
 
 module.exports = function(passport) {
+  db.initialize(dbName, collectionName, function (dbCollection) { // successCallback
+    dbCollection.find().toArray(function (err, result) {
+       if (err) throw err;
+    });
+
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match user
-      User.findOne({
+      dbCollection.findOne({
         email: email
       }).then(user => {
         if (!user) {
@@ -28,14 +37,14 @@ module.exports = function(passport) {
       });
     })
   );
-
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
+    let id = user._id;
+    user_cache = user;
+    done(null, user);
+});
 
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
-  });
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+});
 };

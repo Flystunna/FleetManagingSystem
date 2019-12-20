@@ -1,13 +1,13 @@
 <% if(typeof errors != 'undefined') { %>
   <% errors.forEach(function(error) { %>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		Swal.fire({
 		  icon: 'error',
 		  title: 'Oops...',
 		  text: 'Please Fill all Fields',
 		//  footer: '<a href>Why do I have this issue?</a>'
 		})
-		</script>
+		</script> -->
   	<div class="alert alert-danger alert-dismissible fade show" role="alert">
   	<%= error.msg %>
   	<button type="button" class="close" data-dismiss="alert" aria-label="Close">

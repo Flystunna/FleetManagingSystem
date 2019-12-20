@@ -17,21 +17,28 @@ const Swal = require('sweetalert2')
 require('dotenv').config()
 
 
-mongoose.connect('mongodb://localhost:27017/fleet', { useNewUrlParser: true }, (err) => {
-    if (!err) { console.log('MongoDB Connection Succeeded.') }
-    else { console.log('Error in DB connection : ' + err) }
-});
+
+// mongoose.connect('mongodb://localhost:27017/fleet', { useNewUrlParser: true }, (err) => {
+//     if (!err) { console.log('MongoDB Connection Succeeded.') }
+//     else { console.log('Error in DB connection : ' + err) }
+// });
 
 /// database connection
 var db = mongoose.connection;
-
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://flystunna:Flystunna1.@datas-mbypu.mongodb.net/admin?retryWrites=true&w=majority";
+const client = new MongoClient(uri,  { useNewUrlParser: true },{dbName: 'Users'});
+client.connect(err => {
+   collection = client.db("Users").collection("Users");
+  // perform actions on the collection object
+  if (!err) { console.log('MongoDB Connection is Succeeded.') }
+    else { console.log('Error in DB connection : ' + err) }
+});
 //passport
 
 require('./config/passport')(passport);
+app.use(express.static(path.join(__dirname, 'public')));
 
-//EJS
-app.use(expressLayouts);
-app.set('view engine', 'ejs');
 
 //bodyparser
 app.use(bodyparser.urlencoded({ extended: false}));
@@ -42,29 +49,33 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
+//EJS
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
 
 //Connect Flash
 app.use(flash());
 
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 //Global
 app.use((req, res, next) => {
 	res.locals.success_msg = req.flash('success_msg');
 	res.locals.error_msg = req.flash('error_msg');
 	res.locals.error = req.flash('error');
-	res.locals.msg = req.flash('msg');
+  res.locals.msg = req.flash('msg');
+  res.locals.client = client;
+  res.locals.currentUser = req.user;
 	next();
 });
+
+app.locals.client = client;
+app.locals.uri = uri;
 
 //routes
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/users'));
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', (req, res) => {
