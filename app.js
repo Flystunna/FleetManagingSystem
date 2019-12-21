@@ -103,6 +103,8 @@ app.post("/send", (req, res) => {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     service: "Gmail",
+    port: 465,
+    secure: true, // use SSL
     auth: {
       user: "flystunna1@gmail.com",
       pass: "Stunna6882"

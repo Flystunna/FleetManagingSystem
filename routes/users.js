@@ -312,44 +312,56 @@ db.initialize(dbName, collectionName, function(dbCollection) {
     var ObjectID = require("mongodb").ObjectID;
     // Get Single User by ID
     router.get("/edit/:id", (req, res) => {
-     
-      dbCollection.findOne({ _id: new ObjectID(req.params.id) }, (err, order) => {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render("edit", {
-            error_msg: req.flash("error_msg"),
-            success_msg: req.flash("success_msg"),
-            order: order, layout: false});
+      dbCollection.findOne(
+        { _id: new ObjectID(req.params.id) },
+        (err, order) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render("edit", {
+              error_msg: req.flash("error_msg"),
+              success_msg: req.flash("success_msg"),
+              order: order,
+              layout: false
+            });
+          }
         }
-      });
+      );
     });
 
     router.post("/edit/:id", function(req, res) {
-      dbCollection.findOneAndUpdate({ _id: new ObjectID(req.params.id) },{ $set: req.body },{ upsert: true, new: true }, function(err) {
-        if (err) {
-          req.flash("error_msg", "Something went wrong");
-          console.log(err);
-          res.redirect("/edit/" + req.params.id);
-        } else {
-          req.flash("success_msg", "Order Updated successfully");
-          res.redirect("/list");
+      dbCollection.findOneAndUpdate(
+        { _id: new ObjectID(req.params.id) },
+        { $set: req.body },
+        { upsert: true, new: true },
+        function(err) {
+          if (err) {
+            req.flash("error_msg", "Something went wrong");
+            console.log(err);
+            res.redirect("/edit/" + req.params.id);
+          } else {
+            req.flash("success_msg", "Order Updated successfully");
+            res.redirect("/list");
+          }
         }
-      });
+      );
     });
 
     //	Delete
     router.get("/list/:id", function(req, res) {
-      dbCollection.findOneAndDelete({ _id: new ObjectID(req.params.id) }, function(err, order) {
-        if (err) {
-          req.flash("error_msg", "Order not deleted");
-          
-          res.redirect("/list");
-        } else {
-          req.flash("error_msg", "Order deleted successfuly");
-          res.redirect("/list");
+      dbCollection.findOneAndDelete(
+        { _id: new ObjectID(req.params.id) },
+        function(err, order) {
+          if (err) {
+            req.flash("error_msg", "Order not deleted");
+
+            res.redirect("/list");
+          } else {
+            req.flash("error_msg", "Order deleted successfuly");
+            res.redirect("/list");
+          }
         }
-      });
+      );
     });
   });
 
@@ -420,6 +432,8 @@ db.initialize(dbName, collectionName, function(dbCollection) {
         function(token, user, done) {
           var smtpTransport = nodemailer.createTransport({
             service: "Gmail",
+            port: 465,
+            secure: true, // use SSL
             auth: {
               user: "flystunna1@gmail.com",
               pass: "Stunna6882"
@@ -535,6 +549,8 @@ db.initialize(dbName, collectionName, function(dbCollection) {
           function(user, done) {
             var smtpTransport = nodemailer.createTransport({
               service: "Gmail",
+              port: 465,
+              secure: true, // use SSL
               auth: {
                 user: "flystunna1@gmail.com",
                 pass: "Stunna6882"
