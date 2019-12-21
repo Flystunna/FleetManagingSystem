@@ -1,6 +1,6 @@
-<br/>
+<br />
 <div class="container">
-<div class="container">
+  <div class="container">
     <div class="wrapper animated bounceInLeft">
       <div class="company-info">
         <h3>Contact Us</h3>
@@ -12,27 +12,32 @@
       </div>
       <div class="contact">
         <h3>Email Us</h3>
-         <% include ./partials/messages %>  
-        <form method="POST" action="send">
+        <% include ./partials/messages %>
+        <form
+          method="POST"
+          name="myForm"
+          onsubmit="return validateForm()"
+          action="send"
+        >
           <p>
             <label>Name</label>
-            <input type="text" name="name">
+            <input type="text" id="name" name="name" />
           </p>
           <p>
             <label>Company</label>
-            <input type="text" name="company">
+            <input type="text" id="company" name="company" />
           </p>
           <p>
             <label>Email Address</label>
-            <input type="email" name="email">
+            <input type="email" id="email" name="email" />
           </p>
           <p>
             <label>Phone Number</label>
-            <input type="text" name="phone">
+            <input type="text" id="phone" name="phone" />
           </p>
           <p class="full">
             <label>Message</label>
-            <textarea name="message" rows="5"></textarea>
+            <textarea name="message" id="message" rows="5"></textarea>
           </p>
           <p class="full">
             <button type="submit">Submit</button>
@@ -41,4 +46,59 @@
       </div>
     </div>
   </div>
-  </div>
+</div>
+<script>
+  function validateForm() {
+    var name = document.forms["myForm"]["name"].value;
+    var email = document.forms["myForm"]["email"].value;
+    var company = document.forms["myForm"]["company"].value;
+    var phone = document.forms["myForm"]["phone"].value;
+    var message = document.forms["myForm"]["message"].value;
+    if (name == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Full Name is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (email == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Email is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (company == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Company is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (phone == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Contact Phone is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (message == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Message is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    }
+  }
+</script>

@@ -100,7 +100,6 @@ app.post("/send", (req, res) => {
     <h3>Message</h3>
     <p>${req.body.message}</p>
   `;
-
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -112,9 +111,9 @@ app.post("/send", (req, res) => {
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: "flystunna1@gmail.com",
-    to: "req.body.email", // list of receivers
-    subject: "Node Contact Request", // Subject line
+    from: req.body.email,
+    to: "flystunna1@gmail.com", // list of receivers
+    subject: "Contact Request", // Subject line
     text: "Hello world?", // plain text body
     html: output // html body
   };
