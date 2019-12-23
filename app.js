@@ -14,6 +14,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require("passport-local").Strategy;
 const async = require("async");
 const Swal = require("sweetalert2");
+const SGmail = require("@sendgrid/mail");
 require("dotenv").config();
 
 // mongoose.connect('mongodb://localhost:27017/fleet', { useNewUrlParser: true }, (err) => {

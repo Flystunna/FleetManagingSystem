@@ -54,7 +54,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 
   app.use(bodyparser.urlencoded({ extended: true }));
   // Login Page
-  router.get("/login", (req, res) => res.render("Login"));
+  router.get("/login", (req, res) => res.render("login"));
   //error
   router.get("/error", (req, res) => res.render("error"));
   //tracking page
