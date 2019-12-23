@@ -14,7 +14,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require("passport-local").Strategy;
 const async = require("async");
 const Swal = require("sweetalert2");
-const SGmail = require("@sendgrid/mail");
+const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 
 // mongoose.connect('mongodb://localhost:27017/fleet', { useNewUrlParser: true }, (err) => {
@@ -101,33 +101,22 @@ app.post("/send", (req, res) => {
     <h3>Message</h3>
     <p>${req.body.message}</p>
   `;
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    service: "Gmail",
-    port: 465,
-    secure: true, // use SSL
-    auth: {
-      user: "flystunna1@gmail.com",
-      pass: "Stunna6882"
-    }
-  });
 
-  // setup email data with unicode symbols
-  let mailOptions = {
-    from: req.body.email,
-    to: "flystunna1@gmail.com", // list of receivers
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+  const msg = {
+    to: req.body.email,
+    from: "flystunna1@gmail.com",
     subject: "Contact Request", // Subject line
     text: "Hello world?", // plain text body
     html: output // html body
   };
-
   // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
+  sgMail.send(msg, (error, info) => {
     if (error) {
-      return console.log(error);
+      res.render("contact");
+      console.log(error);
     }
-    console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     req.flash("msg", "Email has been sent");
     res.render("contact", { msg: "Email has been sent" });
   });

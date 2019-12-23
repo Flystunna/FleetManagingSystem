@@ -33,7 +33,14 @@
           </p>
           <p>
             <label>Phone Number</label>
-            <input type="text" id="phone" name="phone" />
+            <input
+              type="text"
+              pattern=".{11}"
+              required
+              title="11 characters expected"
+              id="phone"
+              name="phone"
+            />
           </p>
           <p class="full">
             <label>Message</label>

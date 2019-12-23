@@ -13,34 +13,17 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const { ensureAuthenticated } = require("../config/auth");
 const { checkUser } = require("../config/auth");
 const Swal = require("sweetalert2");
+const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// var collection;
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://flystunna:Flystunna1.@datas-mbypu.mongodb.net/admin?retryWrites=true&w=majority";
-// const client = new MongoClient(uri,  { useNewUrlParser: true },{dbName: 'Users'});
-// client.connect(err => {
-//    collection = client.db("Users").collection("Users");
-//   // perform actions on the collection object
-//   if (!err) { console.log('MongoDB Connection is Succeeded.') }
-//     else { console.log('Error in DB connection : ' + err) }
-// });
-
-// var dbs = MongoClient.connection;
-//usermodel
-// << db setup >>
 const db = require("../config/db");
 const dbName = "Users";
 const collectionName = "Users";
 const collectionName2 = "Orders";
 db.initialize(dbName, collectionName, function(dbCollection) {
-  // successCallback
-  // get all items
   dbCollection.find().toArray(function(err, result) {
     if (err) throw err;
-    // console.log(result);
-
-    // << return response to client >>
   });
 
   const User = require("../models/User");
@@ -430,16 +413,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
           );
         },
         function(token, user, done) {
-          var smtpTransport = nodemailer.createTransport({
-            service: "Gmail",
-            port: 465,
-            secure: true, // use SSL
-            auth: {
-              user: "flystunna1@gmail.com",
-              pass: "Stunna6882"
-            }
-          });
-          var mailOptions = {
+          var msg = {
             to: req.body.email,
             from: "flystunna1@gmail.com",
             subject: "Node.js Password Reset",
@@ -453,7 +427,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
               "\n\n" +
               "If you did not request this, please ignore this email and your password will remain unchanged.\n"
           };
-          smtpTransport.sendMail(mailOptions, err => {
+          sgMail.send(msg, err => {
             req.flash(
               "success_msg",
               "An e-mail has been sent to " +
@@ -547,16 +521,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
             );
           },
           function(user, done) {
-            var smtpTransport = nodemailer.createTransport({
-              service: "Gmail",
-              port: 465,
-              secure: true, // use SSL
-              auth: {
-                user: "flystunna1@gmail.com",
-                pass: "Stunna6882"
-              }
-            });
-            var mailOptions = {
+            var msg = {
               to: user.email,
               from: "flystunna1@gmail.com",
               subject: "Your password has been changed",
@@ -566,7 +531,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
                 user.email +
                 " has just been changed.\n"
             };
-            smtpTransport.sendMail(mailOptions, err => {
+            sgMail.send(msg, err => {
               req.flash("success", "Success! Your password has been changed.");
               res.redirect("/login");
               done(err, "done");
