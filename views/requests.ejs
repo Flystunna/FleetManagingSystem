@@ -1,0 +1,45 @@
+<% include ./partials/messages %>
+<br />
+<table
+  class="table table-bordered table-light table-hover table-responsive"
+  style="width: 115%;"
+>
+  <% if(result) { %> <% result.forEach(function(result) { %>
+  <div class="container">
+    <thead class="thead-light">
+      <th>Customer Full Name</th>
+      <th>Customer Phone/Optional</th>
+      <th>Sender's Email/Optional</th>
+      <th>Receiver Full Name</th>
+      <th>Sender State</th>
+      <th>Sender Address</th>
+      <th>Receiver State</th>
+      <th>Receiver Address</th>
+      <th>Info</th>
+      <th>No Of Pieces</th>
+      <th>Weight</th>
+      <th>Dimensions</th>
+      <th>Instructions</th>
+    </thead>
+    <tbody>
+      <td><%= result.senderFullName + " " + result.senderLastName %></td>
+      <td><%= result.contactPhone + " / " + result.contactHomePhone %></td>
+      <td><%= result.senderEmail + " / " + result.senderOptionalEmail %></td>
+      <td><%= result.receiverFullName + " " + result.receiverLastName %></td>
+      <td><%= result.senderState %></td>
+      <td><%= result.senderAddress %></td>
+      <td><%= result.receiverState %></td>
+      <td><%= result.receiverAddress %></td>
+      <td><%= result.info %></td>
+      <td><%= result.pieces %></td>
+      <td><%= result.weight %></td>
+      <td><%= result.dimensions %></td>
+      <td><%= result.instructions %></td>
+    </tbody>
+  </div>
+  <% }) %> <% } else { %>
+  <div class="container" style="background-color: white;">
+    <p>No Data found</p>
+    <% } %>
+  </div>
+</table>

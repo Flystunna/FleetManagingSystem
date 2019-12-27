@@ -21,6 +21,7 @@ const db = require("../config/db");
 const dbName = "Users";
 const collectionName = "Users";
 const collectionName2 = "Orders";
+const collectionName3 = "Request";
 db.initialize(dbName, collectionName, function(dbCollection) {
   dbCollection.find().toArray(function(err, result) {
     if (err) throw err;
@@ -32,6 +33,8 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 
   const Order = require("../models/Order");
 
+  const Request = require("../models/Request");
+
   var app = express();
   app.use(flash());
 
@@ -39,6 +42,9 @@ db.initialize(dbName, collectionName, function(dbCollection) {
   // Login Page
   router.get("/login", (req, res) => res.render("login"));
   //error
+
+  router.get("/makeorder", (req, res) => res.render("makeorder"));
+
   router.get("/error", (req, res) => res.render("error"));
   //tracking page
   router.get("/track", (req, res, next) => {
@@ -59,11 +65,119 @@ db.initialize(dbName, collectionName, function(dbCollection) {
           console.log(err);
           res.redirect("/error");
         } else {
-          console.log(order);
           res.render("track", { order: order });
           next();
         }
       });
+    });
+  });
+  // Order Page
+  router.get("/requests", ensureAuthenticated, (req, res) => {
+    db.initialize(dbName, collectionName3, function(dbCollection) {
+      dbCollection.find().toArray(function(err, result) {
+        if (err) throw err;
+        else {
+          res.render("requests", { result: result });
+        }
+      });
+    });
+  });
+
+  router.post("/makeorder", (req, res, next) => {
+    db.initialize(dbName, collectionName3, function(dbCollection) {
+      const {
+        senderFullName,
+        senderLastName,
+        contactPhone,
+        contactHomePhone,
+        senderEmail,
+        senderOptionalEmail,
+        creationTime,
+        receiverFullName,
+        receiverLastName,
+        receiverPhone,
+        receiverOptionalPhone,
+        receiverEmail,
+        receiverOptionalEmail,
+        senderState,
+        senderAddress,
+        receiverState,
+        receiverAddress,
+        info,
+        pieces,
+        weight,
+        dimensions,
+        instructions,
+        time,
+        isConfirmed
+      } = req.body;
+      let errors = [];
+      //check required fields
+      if (
+        !senderFullName ||
+        !senderLastName ||
+        !contactPhone ||
+        !senderEmail ||
+        !receiverFullName ||
+        !receiverLastName ||
+        !receiverPhone ||
+        !receiverEmail ||
+        !senderState ||
+        !senderAddress ||
+        !receiverState ||
+        !receiverAddress ||
+        !info ||
+        !pieces ||
+        !instructions
+      ) {
+        errors.push({ msg: "Please enter all fields" });
+      }
+      if (errors.length > 0) {
+        console.log(req.body);
+        console.log(errors);
+        res.render("makeorder", {
+          errors
+        });
+      } else {
+        const newRequest = new Request({
+          senderFullName,
+          senderLastName,
+          contactPhone,
+          contactHomePhone,
+          senderEmail,
+          senderOptionalEmail,
+          creationTime: Date.Now,
+          receiverFullName,
+          receiverLastName,
+          receiverPhone,
+          receiverOptionalPhone,
+          receiverEmail,
+          receiverOptionalEmail,
+          senderState,
+          senderAddress,
+          receiverState,
+          receiverAddress,
+          info,
+          pieces,
+          weight,
+          dimensions,
+          instructions,
+          time,
+          isConfirmed
+        });
+        dbCollection.insertOne(newRequest, (err, response) => {
+          if (err) {
+            console.log(err);
+            return response.status(500).send(err);
+          } else {
+            req.flash(
+              "success_msg",
+              "Request has been made. We will get back to you with a response."
+            );
+            res.redirect("/makeorder");
+          }
+        });
+      }
     });
   });
 

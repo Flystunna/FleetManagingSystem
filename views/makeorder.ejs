@@ -1,0 +1,430 @@
+<div class="card card-body">
+  <h1 class="text-center mb-3">
+    <i class="fas fa-shipping-fast"></i> Door Pick Up Order
+  </h1>
+  <% include ./partials/messages %>
+  <form name="myForm" onsubmit="return validateForm();" method="POST">
+    <div>
+      <h2>Sender's Information</h2>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="senderFullName"
+            name="senderFullName"
+            class="form-control"
+            placeholder="First Name"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            id="senderLastName"
+            name="senderLastName"
+            class="form-control"
+            placeholder="Last Name"
+          />
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="contactPhone"
+            name="contactPhone"
+            class="form-control"
+            placeholder="Contact Phone"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            id="contactHomePhone"
+            name="contactHomePhone"
+            placeholder="Home Phone (Optional)"
+          />
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="senderEmail"
+            name="senderEmail"
+            class="form-control"
+            placeholder="Email Address"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            id="senderOptionalEmail"
+            name="senderOptionalEmail"
+            placeholder="Alternate Email Address (Optional)"
+          />
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <div>
+      <h2>Receiver's Information</h2>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="receiverFullName"
+            name="receiverFullName"
+            class="form-control"
+            placeholder="First Name"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            id="receiverLastName"
+            name="receiverLastName"
+            class="form-control"
+            placeholder="Last Name"
+          />
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="receiverPhone"
+            name="receiverPhone"
+            class="form-control"
+            placeholder="Contact Phone"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            id="receiverOptionalPhone"
+            name="receiverOptionalPhone"
+            class="form-control"
+            placeholder="Home Phone (Optional)"
+          />
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="receiverEmail"
+            name="receiverEmail"
+            class="form-control"
+            placeholder="Email Address"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            id="receiverOptionalEmail"
+            name="receiverOptionalEmail"
+            class="form-control"
+            placeholder="Alternate Email Address (Optional)"
+          />
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <p></p>
+    <hr />
+    <div>
+      <h2>Address Details</h2>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="senderState"
+            name="senderState"
+            class="form-control"
+            placeholder="Pick Up State"
+          />
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <textarea
+            type="text"
+            id="senderAddress"
+            name="senderAddress"
+            class="form-control"
+            placeholder="Pick Up Address"
+            col="5"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="receiverState"
+            name="receiverState"
+            class="form-control"
+            placeholder="Destination State"
+          />
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <textarea
+            type="text"
+            id="receiverAddress"
+            name="receiverAddress"
+            class="form-control"
+            placeholder="Destination Address"
+            col="5"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          Pick Up Date/Time:
+          <p></p>
+          <div class="input-append date form_datetime">
+            <input
+              size="40"
+              type="text"
+              id="time"
+              name="time"
+              value=""
+              readonly
+            />
+            <i class="fa fa-clock"></i>
+            <span class="add-on"><i class="icon-th"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <hr />
+    <div>
+      <h2>Shipment Details</h2>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            id="info"
+            name="info"
+            placeholder="Enter Package Information"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="number"
+            class="form-control"
+            id="pieces"
+            name="pieces"
+            placeholder="Enter Number of Pieces"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="number"
+            id="weight"
+            name="weight"
+            class="form-control"
+            placeholder="Enter Weight (KG)"
+          />
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="dimensions"
+            name="dimensions"
+            class="form-control"
+            placeholder="Enter Dimensions"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            id="instructions"
+            name="instructions"
+            class="form-control"
+            placeholder="Enter Special Instructions (Indicate in detail)"
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
+    <p></p>
+    <button class="btn btn-success btn-block">
+      <i class="fa fa-send"> </i> Submit
+    </button>
+  </form>
+</div>
+<Script>
+  function validateForm() { var senderFullName =
+  document.forms["myForm"]["senderFullName"].value; var senderLastName =
+  document.forms["myForm"]["senderLastName"].value; var contactPhone =
+  document.forms["myForm"]["contactPhone"].value; var senderEmail =
+  document.forms["myForm"]["senderEmail"].value; var receiverFullName =
+  document.forms["myForm"]["receiverFullName"].value; var receiverLastName =
+  document.forms["myForm"]["receiverLastName"].value; var receiverPhone =
+  document.forms["myForm"]["receiverPhone"].value; var receiverEmail =
+  document.forms["myForm"]["receiverEmail"].value; var senderState =
+  document.forms["myForm"]["senderState"].value; var senderAddress =
+  document.forms["myForm"]["senderAddress"].value; var receiverState =
+  document.forms["myForm"]["receiverState"].value; var receiverAddress =
+  document.forms["myForm"]["receiverAddress"].value; var info =
+  document.forms["myForm"]["info"].value; var instructions =
+  document.forms["myForm"]["instructions"].value;
+  if (senderFullName == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Sender Name is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (senderLastName == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Sender Last Name is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    }  else if (contactPhone == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Contact Phone is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    }  else if (senderEmail == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Sender Email is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (receiverFullName == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Receiver Full Name is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (receiverLastName == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Receiver Last Name is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (receiverPhone == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Receiver Phone is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (receiverEmail == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Receiver Email is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (senderState == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Sender State is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (senderAddress == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Sender Address is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (receiverState == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Receiver State is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (receiverAddress == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Receiver Address is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (info == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "A little Information will be helpful",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else if (instructions == "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Instructions is required",
+        type: "warning",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Error"
+      });
+      return false;
+    } else {
+      Swal.fire({
+        title: "Done",
+        text:
+          "Request Done, Thank You, We will be in touch!",
+          type: "success",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ok"
+      });
+      return true;
+    }
+   }
+</Script>
