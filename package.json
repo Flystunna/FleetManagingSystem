@@ -25,7 +25,7 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mongodb": "^3.1.13",
     "mongoose": "^4.10.8",
     "nodemailer": "^5.1.1",
